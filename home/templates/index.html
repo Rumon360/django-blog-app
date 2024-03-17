@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %}
+  Learning | Home
+{% endblock %}
+{% block start %}
+  <div class="w-full h-full mx-auto pt-10">
+    <h1 class="text-5xl font-semibold">Welcome to <span class="text-green-500">BLOGO!</span></h1>
+    <h2 class="mt-4 max-w-prose text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sapiente itaque cum vero odit facilis quae, nam atque minima vitae.</h2>
+    <a href="/create" class="bg-green-500 inline-block mt-4 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Write Now</a>
+    {% if blogs %}
+      {% if search_query %}
+        <h1 class="text-3xl font-semibold my-10">Results for : "{{ search_query }}"</h1>
+      {% else %}
+        <h1 class="text-3xl font-semibold my-10">Most Viewed Blogs ⚡</h1>
+      {% endif %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for blog in blogs %}
+          <div class="w-full cursor-pointer group md:max-w-sm h-fit rounded overflow-hidden shadow-lg">
+            <div class="w-full aspect-video relative overflow-hidden">
+              <img src="{{ blog.image.url }}" alt="" class="group-hover:scale-110 transition ease-in-out duration-500 w-full h-full object-cover" />
+            </div>
+            <div class="px-6 py-4">
+              <a href="/blogs/{{ blog.id }}"><h2 class="font-bold hover:text-green-500 text-xl mb-2 leading-tight line-clamp-2">{{ blog.title }}</h2></a>
+              <p class="text-gray-700 text-base line-clamp-3 my-4">{{ blog.content }}</p>
+              <p class="text-gray-500 text-sm mt-2">Author: {{ blog.user.username }}</p>
+              <p class="text-gray-500 text-sm mt-2">Created at: {{ blog.created_at }}</p>
+              {% if request.user.is_authenticated %}
+                {% if blog.user == request.user %}
+                  <div>
+                    <a href="/update-blog/{{ blog.id }}/" class="bg-green-500 inline-block mt-4 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</a>
+                    <a href="/delete-blog/{{ blog.id }}/" class="bg-red-500 inline-block mt-4 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</a>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      {% if search_query %}
+        <h1 class="text-3xl font-semibold my-10">Results for : "{{ search_query }}"</h1>
+      {% endif %}
+      <p class="mt-10">No blogs found...</p>
+    {% endif %}
+  </div>
+{% endblock %}

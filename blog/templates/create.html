@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block title %}
+  Learning | Create
+{% endblock %}
+{% block start %}
+  <div class="w-full mx-auto pt-10">
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-lg text-center">
+        <h1 class="text-2xl font-bold sm:text-3xl">Create your blog today!</h1>
+      </div>
+      <form method="post" enctype="multipart/form-data" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+        {% csrf_token %}
+        <div>
+          <label for="title" class="sr-only">Title</label>
+          <div class="relative">
+            <input required name="title" type="text" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter Title" />
+          </div>
+        </div>
+        <div>
+          <label for="content" class="sr-only">Content</label>
+          <div class="relative">
+            <textarea required name="content" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Write your blog..."></textarea>
+          </div>
+        </div>
+        <div>
+          <label for="image" class="sr-only">Password</label>
+          <div class="relative">
+            <input required name="image" type="file" accept="image/*" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" />
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button type="submit" class="inline-block hover:bg-green-700 rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

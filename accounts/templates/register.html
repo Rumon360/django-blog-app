@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block title %}
+  Learning | Register
+{% endblock %}
+{% block start %}
+  {% if messages %}
+    <div class="max-w-sm absolute top-28 left-1/2 -translate-x-1/2 py-3 pl-4 pr-10 leading-normal text-red-700 bg-red-100 rounded-lg" role="alert">
+      {% for message in messages %}
+        <p class="font-bold">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="w-full mx-auto pt-10">
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-lg text-center">
+        <h1 class="text-2xl font-bold sm:text-3xl">Create an account today!</h1>
+      </div>
+      <form method="post" enctype="multipart/form-data" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+        {% csrf_token %}
+        <div>
+          <label for="first_name" class="sr-only">First Name</label>
+          <div class="relative">
+            <input required name="first_name" type="text" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter first name" />
+          </div>
+        </div>
+        <div>
+          <label for="last_name" class="sr-only">Last Name</label>
+          <div class="relative">
+            <input required name="last_name" type="text" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter last name" />
+          </div>
+        </div>
+        <div>
+          <label for="username" class="sr-only">Username</label>
+          <div class="relative">
+            <input required name="username" type="text" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter username" />
+          </div>
+        </div>
+        <div>
+          <label for="password" class="sr-only">Password</label>
+          <div class="relative">
+            <input required name="password" type="password" class="w-full border rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter password" />
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <button type="submit" class="inline-block hover:bg-green-700 rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white">Register</button>
+        </div>
+        <div>
+          <a href="/login" class="text-blue-500 hover:underline mt-4">Already have an account? Login now</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
